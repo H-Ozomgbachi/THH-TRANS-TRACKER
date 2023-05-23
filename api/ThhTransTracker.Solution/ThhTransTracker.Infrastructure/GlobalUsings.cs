@@ -1,0 +1,15 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using ThhTransTracker.Core.Entities;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using ThhTransTracker.Infrastructure.DataContext.EntityConfigurations;
+global using ThhTransTracker.Core.Helpers;
+global using ThhTransTracker.Core.Interfaces.IRepositories;
+global using ThhTransTracker.Core.QueryParams;
+global using ThhTransTracker.Infrastructure.DataContext;
+global using ThhTransTracker.Core.Interfaces.IServices;
+global using ThhTransTracker.Core.DTOs;
+global using AutoMapper;
+global using ThhTransTracker.Shared.Types;
+global using ThhTransTracker.Shared.Exceptions;
+global using Newtonsoft.Json;
+global using Newtonsoft.Json.Serialization;
