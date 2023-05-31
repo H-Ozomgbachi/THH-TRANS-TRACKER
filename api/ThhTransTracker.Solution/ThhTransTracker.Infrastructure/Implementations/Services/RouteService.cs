@@ -53,14 +53,12 @@
 
         public async Task<Result<RouteDto>> UpdateRoute(UpdateRouteDto updateRouteDto, string userId)
         {
-            var route = await _routeRepository.GetRoute(updateRouteDto.Id);
-
-            if (route == null)
+            var route = new Route
             {
-                throw new NotFoundException($"Route with id: {updateRouteDto.Id} does not exist");
-            }
+                UpdatedBy = userId,
+                DateUpdated = DateTime.UtcNow,
+            };
             _mapper.Map(updateRouteDto, route);
-            route.UpdatedBy = userId; route.DateUpdated = DateTime.UtcNow;
             return new Result<RouteDto>
             {
                 Content = _mapper.Map<RouteDto>(await _routeRepository.UpdateRoute(route)),

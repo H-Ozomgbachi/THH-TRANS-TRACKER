@@ -6,6 +6,8 @@
         {
             services.AddScoped<IRouteRepository, RouteRepository>();
             services.AddScoped<IRouteService, RouteService>();
+            services.AddScoped<IShipperRepository, ShipperRepository>();
+            services.AddScoped<IShipperService, ShipperService>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {

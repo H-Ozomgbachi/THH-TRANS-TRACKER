@@ -45,13 +45,18 @@
             {
                 source = source.Where(x => x.DestinationState.ToLower() == routeParam.DestinationState.ToLower());
             }
-            
+
             return await PagedList<Route>
                 .ToPagedListAsync(source, routeParam.PageNumber, routeParam.PageSize);
         }
 
         public async Task<Route> UpdateRoute(Route route)
         {
+            var existingRoute = await _dbContext.Routes.Where(x => x.Id == route.Id).FirstOrDefaultAsync();
+            if (existingRoute is null)
+            {
+                throw new NotFoundException($"Route with id: {route.Id} does not exist");
+            }
             var result = _dbContext.Update(route); await _dbContext.SaveChangesAsync();
             return result.Entity;
         }

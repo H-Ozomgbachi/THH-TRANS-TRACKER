@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\" />
+    <Compile Remove="CQRS\**" />
+    <EmbeddedResource Remove="CQRS\**" />
+    <None Remove="CQRS\**" />
   </ItemGroup>
 
   <ItemGroup>
