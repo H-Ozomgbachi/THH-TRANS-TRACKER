@@ -8,6 +8,7 @@
 
         public DbSet<Route> Routes { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
+        public DbSet<TruckSize> TruckSizes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -15,6 +16,7 @@
 
             modelBuilder.ApplyConfiguration(new RouteEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ShipperEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new TruckSizeEntityConfiguration());
         }
     }
 }
