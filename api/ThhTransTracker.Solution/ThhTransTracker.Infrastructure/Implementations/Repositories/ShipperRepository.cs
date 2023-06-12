@@ -1,6 +1,4 @@
-﻿using ThhTransTracker.Core.Entities;
-
-namespace ThhTransTracker.Infrastructure.Implementations.Repositories
+﻿namespace ThhTransTracker.Infrastructure.Implementations.Repositories
 {
     public class ShipperRepository : IShipperRepository
     {

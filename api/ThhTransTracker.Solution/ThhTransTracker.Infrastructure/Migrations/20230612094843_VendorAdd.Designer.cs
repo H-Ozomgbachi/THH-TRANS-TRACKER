@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ThhTransTracker.Infrastructure.DataContext;
 
@@ -11,9 +12,10 @@ using ThhTransTracker.Infrastructure.DataContext;
 namespace ThhTransTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(EfCoreDbContext))]
-    partial class EfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230612094843_VendorAdd")]
+    partial class VendorAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("f8f37d0b-c95d-4cbb-bc5c-3b1d54d419ee"));
+                        .HasDefaultValue(new Guid("7f75ef4e-632a-4e62-b18c-09efcd5d62c9"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -74,7 +76,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("03ce6343-3c3e-4ee1-afa9-6b7fee67bbed"));
+                        .HasDefaultValue(new Guid("cab4c6f4-62a3-412d-81f9-6506e181c9b7"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -172,7 +174,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("82281e5f-2633-44e6-b478-75d5f307d682"));
+                        .HasDefaultValue(new Guid("89d119b5-bc36-4067-9dd8-1fde84d01f60"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -249,57 +251,6 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.ToTable("Vendors");
                 });
 
-            modelBuilder.Entity("ThhTransTracker.Core.Entities.VendorPrice", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DestinationCity")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("EffectiveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Origin")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("TruckSize")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("VendorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendorId");
-
-                    b.ToTable("VendorPrices");
-                });
-
             modelBuilder.Entity("ThhTransTracker.Core.Entities.ShipperPrice", b =>
                 {
                     b.HasOne("ThhTransTracker.Core.Entities.Shipper", "Shipper")
@@ -311,25 +262,9 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Navigation("Shipper");
                 });
 
-            modelBuilder.Entity("ThhTransTracker.Core.Entities.VendorPrice", b =>
-                {
-                    b.HasOne("ThhTransTracker.Core.Entities.Vendor", "Vendor")
-                        .WithMany("VendorPrices")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vendor");
-                });
-
             modelBuilder.Entity("ThhTransTracker.Core.Entities.Shipper", b =>
                 {
                     b.Navigation("ShipperPrices");
-                });
-
-            modelBuilder.Entity("ThhTransTracker.Core.Entities.Vendor", b =>
-                {
-                    b.Navigation("VendorPrices");
                 });
 #pragma warning restore 612, 618
         }

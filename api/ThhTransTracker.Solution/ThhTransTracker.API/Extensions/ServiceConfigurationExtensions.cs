@@ -10,6 +10,12 @@
             services.AddScoped<IShipperService, ShipperService>();
             services.AddScoped<ITruckSizeRepository, TruckSizeRepository>();
             services.AddScoped<ITruckSizeService, TruckSizeService>();
+            services.AddScoped<IShipperPriceRepository, ShipperPriceRepository>();
+            services.AddScoped<IShipperPriceService, ShipperPriceService>();
+            services.AddScoped<IVendorRepository, VendorRepository>();
+            services.AddScoped<IVendorService, VendorService>();
+            services.AddScoped<IVendorPriceRepository, VendorPriceRepository>();
+            services.AddScoped<IVendorPriceService, VendorPriceService>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {

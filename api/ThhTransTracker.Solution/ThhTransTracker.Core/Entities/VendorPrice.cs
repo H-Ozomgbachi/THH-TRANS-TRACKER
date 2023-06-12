@@ -1,6 +1,6 @@
 ﻿namespace ThhTransTracker.Core.Entities
 {
-    public class ShipperPrice : BaseEntity
+    public class VendorPrice : BaseEntity
     {
         public Guid Id { get; set; }
         public string Origin { get; set; }
@@ -9,7 +9,7 @@
         public decimal Price { get; set; }
         public DateTime EffectiveDate { get; set; }
 
-        public Guid ShipperId { get; set; }
-        public Shipper Shipper { get; set; }
+        public Guid VendorId { get; set; }
+        public Vendor Vendor { get; set; }
     }
 }

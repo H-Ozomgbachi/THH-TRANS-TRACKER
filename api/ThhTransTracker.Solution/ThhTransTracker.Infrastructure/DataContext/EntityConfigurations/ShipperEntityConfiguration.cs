@@ -9,6 +9,8 @@
             builder.Property(x => x.Address).IsRequired().HasMaxLength(256);
             builder.Property(x => x.ContactEmail).IsRequired().HasMaxLength(256);
             builder.Property(x => x.ContactPhone).IsRequired().HasMaxLength(256);
+
+            builder.HasMany("ShipperPrices").WithOne("Shipper").OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
