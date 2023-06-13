@@ -16,6 +16,9 @@
             services.AddScoped<IVendorService, VendorService>();
             services.AddScoped<IVendorPriceRepository, VendorPriceRepository>();
             services.AddScoped<IVendorPriceService, VendorPriceService>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<IUtilityRepository, UtilityRepository>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {
@@ -39,7 +42,16 @@
         }
         public static void ConfigureHttpClient(this IServiceCollection services, IConfiguration config)
         {
-
+            services.AddHttpClient(config["AppSettings:FileServer"], c =>
+            {
+                c.BaseAddress = new Uri(config["AppSettings:FileServerBaseUrl"]);
+            }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                }
+            });
         }
         public static void ConfigureHealthChecks(this IServiceCollection services, IConfiguration config)
         {
@@ -53,6 +65,7 @@
             services.AddValidatorsFromAssemblyContaining<CreateRouteDtoValidator>();
 
             services.AddDbContext<EfCoreDbContext>(options => options.UseSqlServer(config["AppSettings:DbConnection"]));
+            services.AddOptions<AppSettings>().Bind(config.GetSection("AppSettings"));
         }
     }
 }

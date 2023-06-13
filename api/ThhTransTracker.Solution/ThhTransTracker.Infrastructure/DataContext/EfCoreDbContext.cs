@@ -25,6 +25,7 @@
             modelBuilder.ApplyConfiguration(new ShipperPriceEntityConfiguration());
             modelBuilder.ApplyConfiguration(new VendorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new VendorPriceEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionEntityConfiguration());
         }
     }
 }

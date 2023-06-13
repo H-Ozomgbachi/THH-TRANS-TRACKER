@@ -24,3 +24,4 @@ global using ThhTransTracker.Infrastructure.DataContext;
 global using ThhTransTracker.Core.Interfaces.IRepositories;
 global using ThhTransTracker.Infrastructure.Implementations.Repositories;
 global using ThhTransTracker.Infrastructure.Implementations.Services;
+global using ThhTransTracker.Core.Entities;

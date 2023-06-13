@@ -5,12 +5,15 @@ namespace ThhTransTracker.Core.Entities
     public class Transaction : BaseEntity
     {
         public Guid Id { get; set; }
+        public string ShipperName { get; set; }
         public string OriginCity { get; set; }
         public string DestinationCity { get; set; }
         public int TruckSize { get; set; }
         public DateTime RequestDate { get; set; }
         public bool IsFulfilled { get; set; } = false;
         public CarrierClass CarrierClass { get; set; }
+        public string VendorName { get; set; }
+        public string InvestorName { get; set; }
         public string TruckNumber { get; set; }
         public DateTime FulfilmentDate { get; set; } = DateTime.MinValue;
         public bool IsAwaitingLoading { get; set; } = false;

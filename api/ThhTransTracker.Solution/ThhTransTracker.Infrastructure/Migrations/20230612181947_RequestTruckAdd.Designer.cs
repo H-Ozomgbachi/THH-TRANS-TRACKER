@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ThhTransTracker.Infrastructure.DataContext;
 
@@ -11,9 +12,10 @@ using ThhTransTracker.Infrastructure.DataContext;
 namespace ThhTransTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(EfCoreDbContext))]
-    partial class EfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230612181947_RequestTruckAdd")]
+    partial class RequestTruckAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("04540bad-dd40-423c-baa1-135ae8da4e69"));
+                        .HasDefaultValue(new Guid("8f1dcb41-7ce2-4cd2-b05a-47a2e3efcc32"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -74,7 +76,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("ecb72d3f-22fa-4b82-aa89-6f7a98d9aeb0"));
+                        .HasDefaultValue(new Guid("a9ece296-96d4-4851-9cfc-d99eb07ffa01"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -205,9 +207,6 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<DateTime>("FulfilmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InvestorName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
@@ -278,9 +277,6 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VendorName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("WaybillImage")
                         .HasColumnType("nvarchar(max)");
 
@@ -294,7 +290,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("e5778804-a57b-45f9-8cc8-9b2844701c33"));
+                        .HasDefaultValue(new Guid("f970c978-957b-43ef-b453-809f203d4b70"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");

@@ -13,3 +13,6 @@ global using ThhTransTracker.Shared.Types;
 global using ThhTransTracker.Shared.Exceptions;
 global using Newtonsoft.Json;
 global using Newtonsoft.Json.Serialization;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;

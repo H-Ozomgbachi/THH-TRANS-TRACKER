@@ -6,3 +6,5 @@ global using ThhTransTracker.Core.DTOs;
 global using AutoMapper;
 global using ThhTransTracker.Shared.Types;
 global using FluentValidation;
+global using Microsoft.AspNetCore.Http;
+global using ThhTransTracker.Core.Enums;
