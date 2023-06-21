@@ -1,5 +1,6 @@
 ﻿namespace ThhTransTracker.API.Controllers.v1
 {
+    [Authorize]
     public class ShippersController : BaseControllerV1
     {
         private readonly IShipperService _shipperService;
@@ -27,7 +28,7 @@
         [HttpPost("CreateShipper/")]
         public async Task<IActionResult> CreateShipper([FromBody]CreateShipperDto createShipperDto)
         {
-            string userId = string.Empty;
+            string userId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _shipperService.CreateShipper(createShipperDto, userId);
             return Ok(response);
         }
@@ -35,7 +36,7 @@
         [HttpPut("UpdateShipper/")]
         public async Task<IActionResult> UpdateShipper([FromBody]UpdateShipperDto updateShipperDto)
         {
-            string userId = string.Empty;
+            string userId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _shipperService.UpdateShipper(updateShipperDto, userId);
             return Ok(response);
         }

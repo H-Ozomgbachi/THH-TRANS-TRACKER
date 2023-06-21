@@ -1,5 +1,6 @@
 ﻿namespace ThhTransTracker.API.Controllers.v1
 {
+    [Authorize]
     public class RoutesController : BaseControllerV1
     {
         private readonly IRouteService _routeService;
@@ -27,7 +28,7 @@
         [HttpPost("CreateRoute/")]
         public async Task<ActionResult> CreateRoute([FromBody]CreateRouteDto createRouteDto)
         {
-            string empId = string.Empty;
+            string empId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _routeService.CreateRoute(createRouteDto, empId);
             return Ok(response);
         }
@@ -35,7 +36,7 @@
         [HttpPut("UpdateRoute/")]
         public async Task<ActionResult> UpdateRoute([FromBody]UpdateRouteDto updateRouteDto)
         {
-            string empId = string.Empty;
+            string empId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _routeService.UpdateRoute(updateRouteDto, empId);
             return Ok(response);
         }

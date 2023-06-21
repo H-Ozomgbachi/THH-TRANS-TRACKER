@@ -16,3 +16,4 @@ global using Newtonsoft.Json.Serialization;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Options;
+global using System.Text;

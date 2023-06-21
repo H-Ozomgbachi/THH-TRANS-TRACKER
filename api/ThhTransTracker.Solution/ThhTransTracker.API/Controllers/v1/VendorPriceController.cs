@@ -1,5 +1,6 @@
 ﻿namespace ThhTransTracker.API.Controllers.v1
 {
+    [Authorize]
     public class VendorPriceController : BaseControllerV1
     {
         private readonly IVendorPriceService _vendorPriceService;
@@ -20,7 +21,7 @@
         [HttpPost("CreateVendorPrices/")]
         public async Task<ActionResult> CreateVendorPrices([FromBody]IEnumerable<CreateVendorPriceDto> createVendorPriceDtos)
         {
-            string userId = string.Empty;
+            string userId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _vendorPriceService.CreateVendorPrices(createVendorPriceDtos, userId);
             return Ok(response);
         }
@@ -28,7 +29,7 @@
         [HttpPut("UpdateVendorPrice/")]
         public async Task<ActionResult> UpdateVendorPrice([FromBody]UpdateVendorPriceDto updateVendorPriceDto)
         {
-            string userId = string.Empty;
+            string userId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _vendorPriceService.UpdateVendorPrice(updateVendorPriceDto, userId);
             return Ok(response);
         }

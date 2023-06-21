@@ -21,6 +21,7 @@ builder.Services.ConfigureVersioning();
 builder.Services.ConfigureHttpClient(builder.Configuration);
 builder.Services.ConfigureHealthChecks(builder.Configuration);
 builder.Services.ConfigureOthers(builder.Configuration);
+builder.Services.ConfigureJwtAccess(builder.Configuration);
 
 builder.Host.UseSerilog();
 
@@ -38,6 +39,7 @@ app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

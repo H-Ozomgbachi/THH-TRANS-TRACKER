@@ -2,6 +2,7 @@
 {
     public interface ITransactionService
     {
+        Task<Result<PagedList<TransactionDto>>> GetTransactions(TransactionParam transactionParam);
         Task<Result<TransactionDto>> RequestTruck(RequestTruckDto requestTruckDto, string userId);
         Task<Result<TransactionDto>> GetTransaction(Guid transactionId);
 

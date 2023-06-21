@@ -19,7 +19,7 @@
         public bool IsLoaded { get; set; } = false;
         public DateTime LoadingDate { get; set; }
         public string WaybillImage { get; set; }
-        public WaybillDetail WaybillDetail { get; set; }
+        public WaybillDetailDto WaybillDetail { get; set; }
         public bool IsMobilized { get; set; }
         public bool IsInTransit { get; set; }
         public bool IsThereEmergency { get; set; }
@@ -32,6 +32,7 @@
         public bool PendingBalance { get; set; }
         public bool PendingWaybill { get; set; }
         public bool IsArchived { get; set; }
+        public string UniqueTransactionCode { get; set; }
     }
     public class RequestTruckDto
     {

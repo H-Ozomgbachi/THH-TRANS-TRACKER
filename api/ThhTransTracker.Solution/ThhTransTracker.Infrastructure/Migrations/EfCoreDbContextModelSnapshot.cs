@@ -27,7 +27,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("04540bad-dd40-423c-baa1-135ae8da4e69"));
+                        .HasDefaultValue(new Guid("391acffc-ee70-4154-be73-a03f7b43bd19"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -74,7 +74,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("ecb72d3f-22fa-4b82-aa89-6f7a98d9aeb0"));
+                        .HasDefaultValue(new Guid("7bb35df1-7864-4dfb-adfc-72a163d3210d"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -275,6 +275,10 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<int>("TruckSize")
                         .HasColumnType("int");
 
+                    b.Property<string>("UniqueTransactionCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -286,6 +290,8 @@ namespace ThhTransTracker.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("UniqueTransactionCode");
+
                     b.ToTable("Transactions");
                 });
 
@@ -294,7 +300,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("e5778804-a57b-45f9-8cc8-9b2844701c33"));
+                        .HasDefaultValue(new Guid("51d2dd41-260f-49e9-85c3-da824b04c91c"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");

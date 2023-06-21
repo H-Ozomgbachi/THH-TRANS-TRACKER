@@ -12,8 +12,8 @@ using ThhTransTracker.Infrastructure.DataContext;
 namespace ThhTransTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(EfCoreDbContext))]
-    [Migration("20230612132101_VendorPriceAdd")]
-    partial class VendorPriceAdd
+    [Migration("20230613133343_Restarted")]
+    partial class Restarted
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("f8f37d0b-c95d-4cbb-bc5c-3b1d54d419ee"));
+                        .HasDefaultValue(new Guid("391acffc-ee70-4154-be73-a03f7b43bd19"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -76,7 +76,7 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("03ce6343-3c3e-4ee1-afa9-6b7fee67bbed"));
+                        .HasDefaultValue(new Guid("7bb35df1-7864-4dfb-adfc-72a163d3210d"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -169,12 +169,140 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.ToTable("ShipperPrices");
                 });
 
+            modelBuilder.Entity("ThhTransTracker.Core.Entities.Transaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CancellationReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CancelledBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CarrierClass")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOffloaded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DestinationCity")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("EmergencyInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FulfilmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InvestorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAwaitingLoading")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCancelled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEmergencyResolved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFulfilled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInTransit")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLoaded")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMobilized")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOffloaded")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsThereEmergency")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LoadingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OriginCity")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("PendingBalance")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PendingWaybill")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResolutionInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SentNotification")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ShipperName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("TruckNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TruckSize")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UniqueTransactionCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VendorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WaybillImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("UniqueTransactionCode");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("ThhTransTracker.Core.Entities.TruckSize", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("82281e5f-2633-44e6-b478-75d5f307d682"));
+                        .HasDefaultValue(new Guid("51d2dd41-260f-49e9-85c3-da824b04c91c"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -302,6 +430,38 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.ToTable("VendorPrices");
                 });
 
+            modelBuilder.Entity("ThhTransTracker.Core.Entities.WaybillDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliveryNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoadingPoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TransactionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TransactionId")
+                        .IsUnique();
+
+                    b.ToTable("WaybillDetails");
+                });
+
             modelBuilder.Entity("ThhTransTracker.Core.Entities.ShipperPrice", b =>
                 {
                     b.HasOne("ThhTransTracker.Core.Entities.Shipper", "Shipper")
@@ -324,9 +484,25 @@ namespace ThhTransTracker.Infrastructure.Migrations
                     b.Navigation("Vendor");
                 });
 
+            modelBuilder.Entity("ThhTransTracker.Core.Entities.WaybillDetail", b =>
+                {
+                    b.HasOne("ThhTransTracker.Core.Entities.Transaction", "Transaction")
+                        .WithOne("WaybillDetail")
+                        .HasForeignKey("ThhTransTracker.Core.Entities.WaybillDetail", "TransactionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transaction");
+                });
+
             modelBuilder.Entity("ThhTransTracker.Core.Entities.Shipper", b =>
                 {
                     b.Navigation("ShipperPrices");
+                });
+
+            modelBuilder.Entity("ThhTransTracker.Core.Entities.Transaction", b =>
+                {
+                    b.Navigation("WaybillDetail");
                 });
 
             modelBuilder.Entity("ThhTransTracker.Core.Entities.Vendor", b =>

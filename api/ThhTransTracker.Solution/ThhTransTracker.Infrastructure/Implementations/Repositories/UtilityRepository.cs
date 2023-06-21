@@ -15,12 +15,11 @@
 
         public async Task<string> UploadFile(IFormFile formFile)
         {
-            string result = string.Empty;
-
+            string result;
             try
             {
                 _logger.LogInformation("Upload of file started");
-                var client = _httpClientFactory.CreateClient(_appSettings.Value.FileServer);
+                var client = _httpClientFactory.CreateClient("FileServer");
 
                 byte[] data;
                 using (var br = new BinaryReader(formFile.OpenReadStream()))
@@ -28,7 +27,7 @@
                     data = br.ReadBytes((int)formFile.OpenReadStream().Length);
                 }
                 ByteArrayContent bytes = new(data);
-                StringContent projectName = new("TransTracker");
+                StringContent projectName = new("transtracker");
 
                 MultipartFormDataContent multiContent = new()
                 {

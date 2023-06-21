@@ -1,6 +1,4 @@
-﻿using ThhTransTracker.Core.Enums;
-
-namespace ThhTransTracker.Core.Entities
+﻿namespace ThhTransTracker.Core.Entities
 {
     public class Transaction : BaseEntity
     {
@@ -36,5 +34,6 @@ namespace ThhTransTracker.Core.Entities
         public bool PendingBalance { get; set; } = false;
         public bool PendingWaybill { get; set; } = false;
         public bool IsArchived { get; set; } = false;
+        public string UniqueTransactionCode { get; set; }
     }
 }

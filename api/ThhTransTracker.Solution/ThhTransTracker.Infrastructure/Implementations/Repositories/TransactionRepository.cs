@@ -1,6 +1,4 @@
-﻿using ThhTransTracker.Core.DTOs;
-
-namespace ThhTransTracker.Infrastructure.Implementations.Repositories
+﻿namespace ThhTransTracker.Infrastructure.Implementations.Repositories
 {
     public class TransactionRepository : ITransactionRepository
     {
@@ -38,14 +36,20 @@ namespace ThhTransTracker.Infrastructure.Implementations.Repositories
             transaction.WaybillImage = await _utilityRepository.UploadFile(confirmLoadingDto.WaybillFile);
             transaction.WaybillDetail = _mapper.Map<WaybillDetail>(confirmLoadingDto.WaybillDetail);
             transaction.IsLoaded = true; transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow;
+            transaction.IsAwaitingLoading = true;
 
             var result = _dbContext.Transactions.Update(transaction);
             await _dbContext.SaveChangesAsync();
+            result.Entity.WaybillDetail.Transaction = null;
             return result.Entity;
         }
 
         public async Task<Transaction> CreateTransaction(Transaction transaction)
         {
+            int countForTheMonth = await _dbContext.Transactions.CountAsync(x => x.DateCreated.Month == DateTime.UtcNow.Month && x.DateCreated.Year == DateTime.UtcNow.Year) + 1;
+
+            transaction.UniqueTransactionCode = $"THH{DateTime.UtcNow.Year}{DateTime.UtcNow.Month.ToString().PadLeft(2, '0')}{countForTheMonth.ToString().PadLeft(4, '0')}";
+
             var result = _dbContext.Transactions.Add(transaction);
             await _dbContext.SaveChangesAsync();
             return result.Entity;
@@ -70,6 +74,7 @@ namespace ThhTransTracker.Infrastructure.Implementations.Repositories
             _mapper.Map(fulfillRequestDto, transaction);
 
             transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow; transaction.IsFulfilled = true;
+            transaction.IsAwaitingLoading = true;
 
             var result = _dbContext.Update(transaction);
             await _dbContext.SaveChangesAsync();
@@ -94,6 +99,9 @@ namespace ThhTransTracker.Infrastructure.Implementations.Repositories
         public async Task<PagedList<Transaction>> GetTransactions(TransactionParam transactionParam)
         {
             var source = _dbContext.Transactions.AsNoTracking();
+
+            source = source.Where(x => x.IsFulfilled == transactionParam.IsFulfilled);
+            source = source.Where(x => x.IsLoaded == transactionParam.IsLoaded);
 
             return await PagedList<Transaction>
                 .ToPagedListAsync(source, transactionParam.PageNumber, transactionParam.PageSize);

@@ -43,6 +43,16 @@
             };
         }
 
+        public async Task<Result<PagedList<TransactionDto>>> GetTransactions(TransactionParam transactionParam)
+        {
+            var result = await _transactionRepository.GetTransactions(transactionParam);
+
+            return new Result<PagedList<TransactionDto>>
+            {
+                Content = DtoEngine<TransactionDto>.UseListDtoProcessor(result, _mapper)
+            };
+        }
+
         public async Task<Result<TransactionDto>> RequestTruck(RequestTruckDto requestTruckDto, string userId)
         {
             var transaction = new Transaction

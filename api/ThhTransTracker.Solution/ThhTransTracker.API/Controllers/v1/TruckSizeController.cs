@@ -1,5 +1,6 @@
 ﻿namespace ThhTransTracker.API.Controllers.v1
 {
+    [Authorize]
     public class TruckSizeController : BaseControllerV1
     {
         private readonly ITruckSizeService _truckSizeService;
@@ -20,7 +21,7 @@
         [HttpPost("CreateTruckSizes/")]
         public async Task<IActionResult> CreateTruckSizes([FromBody]IEnumerable<CreateTruckSizeDto> createTruckSizeDtos)
         {
-            string userId = string.Empty;
+            string userId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _truckSizeService.CreateTruckSizes(createTruckSizeDtos, userId);
             return Ok(response);
         }
@@ -28,7 +29,7 @@
         [HttpPut("UpdateTruckSize/")]
         public async Task<IActionResult> UpdateTruckSize([FromBody]UpdateTruckSizeDto updateTruckSizeDto)
         {
-            string userId = string.Empty;
+            string userId = User.FindFirstValue(ClaimTypes.UserData);
             var response = await _truckSizeService.UpdateTruckSize(updateTruckSizeDto, userId);
             return Ok(response);
         }
