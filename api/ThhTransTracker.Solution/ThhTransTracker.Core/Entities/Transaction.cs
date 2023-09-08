@@ -10,7 +10,6 @@
         public DateTime RequestDate { get; set; }
         public bool IsFulfilled { get; set; } = false;
         public CarrierClass CarrierClass { get; set; }
-        public string VendorName { get; set; }
         public string InvestorName { get; set; }
         public string TruckNumber { get; set; }
         public DateTime FulfilmentDate { get; set; } = DateTime.MinValue;
@@ -35,5 +34,12 @@
         public bool PendingWaybill { get; set; } = false;
         public bool IsArchived { get; set; } = false;
         public string UniqueTransactionCode { get; set; }
+        public decimal TransactionAmount { get; set; }
+        public decimal MobilizationAmount { get; set; }
+        public decimal Balance { get; set; }
+        public bool IsAwaitingOffload { get; set; } = false;
+
+        public Guid VendorId { get; set; }
+        public Vendor Vendor { get; set; }
     }
 }

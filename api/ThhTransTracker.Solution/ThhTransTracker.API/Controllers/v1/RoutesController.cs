@@ -11,7 +11,7 @@
         }
 
         [HttpGet("GetRoutes/")]
-        public async Task<ActionResult> GetRoutes([FromQuery]RouteParam routeParam)
+        public async Task<ActionResult<RouteDto>> GetRoutes([FromQuery]RouteParam routeParam)
         {
             var response = await _routeService.GetRoutes(routeParam);
             Response.Headers.Add("X-Pagination", HelperMethods.GetPaginationInfo(response));

@@ -33,6 +33,11 @@
         public bool PendingWaybill { get; set; }
         public bool IsArchived { get; set; }
         public string UniqueTransactionCode { get; set; }
+        public decimal TransactionAmount { get; set; }
+        public decimal MobilizationAmount { get; set; }
+        public decimal Balance { get; set; }
+        public Guid VendorId { get; set; }
+        public bool IsAwaitingOffload { get; set; }
     }
     public class RequestTruckDto
     {
@@ -46,7 +51,7 @@
     {
         public Guid Id { get; set; }
         public CarrierClass CarrierClass { get; set; }
-        public string VendorName { get; set; }
+        public Guid VendorId { get; set; }
         public string InvestorName { get; set; }
         public string TruckNumber { get; set; }
         public DateTime FulfilmentDate { get; set; }
@@ -63,5 +68,28 @@
         public DateTime LoadingDate { get; set; }
         public IFormFile WaybillFile { get; set; }
         public CreateWaybillDetailDto WaybillDetail { get; set; }
+    }
+    public class MobilizeDto
+    {
+        public Guid Id { get; set; }
+        public decimal TransactionAmount { get; set; }
+        public decimal MobilizationAmount { get; set; }
+        public decimal Balance { get; set; }
+    }
+    public class RaiseEmergencyDto
+    {
+        public Guid Id { get; set; }
+        public string EmergencyInfo { get; set; }
+    }
+    public class ResolveEmergencyDto
+    {
+        public Guid Id { get; set; }
+        public string ResolutionInfo { get; set; }
+    }
+    public class ConfirmOffloadingDto
+    {
+        public Guid Id { get; set; }
+        public DateTime DateOffloaded { get; set; }
+        public bool IsOffloaded { get; set; }
     }
 }

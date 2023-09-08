@@ -11,6 +11,10 @@
             CreateMap<ConfirmLoadingDto, Transaction>().ReverseMap();
             CreateMap<CreateWaybillDetailDto, WaybillDetail>().ReverseMap();
             CreateMap<WaybillDetailDto, WaybillDetail>().ReverseMap();
+            CreateMap<MobilizeDto, Transaction>().ReverseMap();
+            CreateMap<RaiseEmergencyDto, Transaction>().ReverseMap();
+            CreateMap<ResolveEmergencyDto, Transaction>().ReverseMap();
+            CreateMap<ConfirmOffloadingDto, Transaction>().ReverseMap();
         }
     }
 }

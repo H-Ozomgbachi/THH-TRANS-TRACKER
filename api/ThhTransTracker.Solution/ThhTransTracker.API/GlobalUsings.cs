@@ -27,3 +27,4 @@ global using ThhTransTracker.Infrastructure.Implementations.Services;
 global using ThhTransTracker.Core.Entities;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.Authorization;
+global using ThhTransTracker.Core.Helpers;

@@ -9,5 +9,6 @@
         public string BankName { get; set; }
 
         public ICollection<VendorPrice> VendorPrices { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

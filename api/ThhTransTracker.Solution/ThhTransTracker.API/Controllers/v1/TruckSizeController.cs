@@ -11,7 +11,7 @@
         }
 
         [HttpGet("GetTruckSizes/")]
-        public async Task<IActionResult> GetTruckSizes([FromQuery]TruckSizeParam truckSizeParam)
+        public async Task<ActionResult<TruckSizeDto>> GetTruckSizes([FromQuery]TruckSizeParam truckSizeParam)
         {
             var response = await _truckSizeService.GetTruckSizes(truckSizeParam);
             Response.Headers.Add("X-Pagination", HelperMethods.GetPaginationInfo(response));

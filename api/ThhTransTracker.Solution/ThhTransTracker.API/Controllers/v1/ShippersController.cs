@@ -11,7 +11,7 @@
         }
 
         [HttpGet("GetShippers/")]
-        public async Task<IActionResult> GetShippers([FromQuery]ShipperParam shipperParam)
+        public async Task<ActionResult<Result<PagedList<ShipperDto>>>> GetShippers([FromQuery]ShipperParam shipperParam)
         {
             var response = await _shipperService.GetShippers(shipperParam);
             Response.Headers.Add("X-Pagination", HelperMethods.GetPaginationInfo(response));

@@ -35,12 +35,26 @@
 
             transaction.WaybillImage = await _utilityRepository.UploadFile(confirmLoadingDto.WaybillFile);
             transaction.WaybillDetail = _mapper.Map<WaybillDetail>(confirmLoadingDto.WaybillDetail);
+
             transaction.IsLoaded = true; transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow;
-            transaction.IsAwaitingLoading = true;
+            transaction.IsAwaitingLoading = false;
 
             var result = _dbContext.Transactions.Update(transaction);
             await _dbContext.SaveChangesAsync();
             result.Entity.WaybillDetail.Transaction = null;
+            return result.Entity;
+        }
+
+        public async Task<Transaction> ConfirmOffloading(ConfirmOffloadingDto confirmOffloadingDto, string userId)
+        {
+            var transaction = await GetTransaction(confirmOffloadingDto.Id);
+
+            _mapper.Map(confirmOffloadingDto, transaction);
+
+            transaction.IsAwaitingOffload = false; transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow;
+
+            var result = _dbContext.Transactions.Update(transaction);
+            await _dbContext.SaveChangesAsync();
             return result.Entity;
         }
 
@@ -65,6 +79,17 @@
             }
             _dbContext.Transactions.Remove(transaction);
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Transaction> EndTrip(Guid transactionId, string userId)
+        {
+            var transaction = await GetTransaction(transactionId);
+
+            transaction.IsInTransit = false; transaction.IsAwaitingOffload = true; transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow;
+
+            var result = _dbContext.Transactions.Update(transaction);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
         public async Task<Transaction> FulfilRequest(FulfillRequestDto fulfillRequestDto, string userId)
@@ -105,6 +130,44 @@
 
             return await PagedList<Transaction>
                 .ToPagedListAsync(source, transactionParam.PageNumber, transactionParam.PageSize);
+        }
+
+        public async Task<Transaction> Mobilize(MobilizeDto mobilizeDto, string userId)
+        {
+            var transaction = await GetTransaction(mobilizeDto.Id);
+
+            _mapper.Map(mobilizeDto, transaction);
+
+            transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow; transaction.IsInTransit = true;
+            transaction.PendingBalance = transaction.Balance > 0; transaction.IsMobilized = true;
+
+            var result = _dbContext.Transactions.Update(transaction);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<Transaction> RaiseEmergency(RaiseEmergencyDto raiseEmergencyDto, string userId)
+        {
+            var transaction = await GetTransaction(raiseEmergencyDto.Id);
+
+            _mapper.Map(raiseEmergencyDto, transaction);
+            transaction.IsThereEmergency = true; transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow;
+
+            var result = _dbContext.Transactions.Update(transaction);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<Transaction> ResolveEmergency(ResolveEmergencyDto resolveEmergencyDto, string userId)
+        {
+            var transaction = await GetTransaction(resolveEmergencyDto.Id);
+
+            _mapper.Map(resolveEmergencyDto, transaction);
+            transaction.IsEmergencyResolved = true; transaction.UpdatedBy = userId; transaction.DateUpdated = DateTime.UtcNow;
+
+            var result = _dbContext.Transactions.Update(transaction);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
         public async Task<Transaction> UpdateTransaction(Transaction transaction)
